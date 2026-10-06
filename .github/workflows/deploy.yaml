@@ -53,21 +53,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Debug auth variables
-        run: |
-              echo "CDF_PROJECT=${CDF_PROJECT}"
-              echo "IDP_TENANT_ID=${IDP_TENANT_ID}"
-              echo "LOGIN_FLOW=${LOGIN_FLOW}"
-              if [ -z "$IDP_CLIENT_ID" ]; then
-                echo "IDP_CLIENT_ID is EMPTY"
-              else
-                echo "IDP_CLIENT_ID exists"
-              fi
-              if [ -z "$IDP_CLIENT_SECRET" ]; then
-                echo "IDP_CLIENT_SECRET is EMPTY"
-              else
-                echo "IDP_CLIENT_SECRET exists"
-              fi
+      - name: Remove .env
+        run: rm -f .env
       - name: Verify and Update Toolkit Authorization
         run: yes | cdf auth verify
       - name: Build Toolkit Configurations
